@@ -1,52 +1,47 @@
-<head>
 
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<body>
+     <style>
 
+      body {
+    padding: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    
+    background-color: #28282d;
+}
+    </style>
+    
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
 
 <link rel="stylesheet" href="assets/application.css">
 
-</head>
-
-
 <div class="head">
-    
-
-    
-<p id="notice"><%= notice %></p>
 
 <% if member_signed_in? %>
-
-
-  <p>Welcome, <%= current_member.email %></p>
-  
-  <div class="logout"><%= link_to 'Logout' ,destroy_member_session_path, :method => :delete,class: "btn btn-danger" %>
-</div>
-
+  <p>Welcome <%= current_member.email %></p>
+  <div class="logout"><%= link_to 'Logout', destroy_member_session_path, :method => :delete, class:"btn btn-danger" %></div>
+<p id="notice"><%= notice %></p>
 
 </div>
-
-
 
 <div class="Titel">
 
-<div class="datumm">
-    
-<%= form_tag({ :action => "index"}, { :method => "get"}) do %>
-<%= select_date(date = Date.current, options = {}, html_options = {class: "btn btn-default"})%>
-<%= submit_tag "Filter" ,class: "btn btn-default" %>
-</div>
+
+  <%= form_tag({ :action => "index"}, { :method => "get"}) do %>
+<%= select_date(date = Date.current, options = {}, html_options = {})%>
+<%= submit_tag "Filter" %>
+
+      <input name="b_print" type="button" class="btn btn-default"   onClick="printdiv('div_print');" value=" Print ">
+<%= link_to 'New Truck order', new_truck_order_path, class:"btn btn-default" %>
+
 <% end %>
-     
-     
-     <div class="print"><input name="b_print" type="button" class="btn btn-default"   onClick="printdiv('div_print');" value=" Print Page ">
-     <%= link_to 'New Truck order', new_truck_order_path, class: "btn btn-primary"%>
 
 </div>
-</div>
 
-    
+
 
     <div class="Container" id="div_print">
 
@@ -76,8 +71,11 @@
  <div class="eintrag"> 
  
  
-         
-         <p> <b>Unitload:</b>         <%= to.truck.unitload if to.truck %></p>
+     
+
+        <p> <b>Time:</b>         <%= to.time.strftime("%I:%M:%S") if to %></p>
+       <p> <b>Unitload:</b>         <%= to.truck.unitload if to.truck %></p>
+           
          <p><b>Numberpallets:</b>     <%= to.truck.numberpallets if to.truck %></p>
          <p><b>Licensplate:</b>       <%= to.truck.licenseplate if to.truck %></p>
          <p><b>Shippingagency:</b>     <%= to.truck.shippingagency if to.truck %></p>
@@ -94,24 +92,24 @@
        <% end %>
 
 
+    
         </div>
     
 
 
     <% end %>
-    
-           
+      
           
        
        <div class="ende">
-           <div class="wareneingang">Incoming: <%= eingang %></div>
-           <div class="warenausgang">Outgoing: <%= ausgang %></div>
-        <div class="edit"><%= link_to 'Edit', edit_truck_order_path(truck_order),class: "btn btn-success" , :onclick => 'doMyStuff()'%></div>
-        <div class="destroy"><%= link_to 'Destroy', truck_order, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-danger" %></div><br>
+           <h1 style="color:white;">Incoming: <%= eingang %></h1>
+           <h1 style="color:white">Outgoing: <%= ausgang %></h1>
+        <div class="edit"><%= link_to 'Edit', edit_truck_order_path(truck_order), class:"btn btn-success" %></div>
+        <div class="destroy"><%= link_to 'Destroy', truck_order, method: :delete, data: { confirm: 'Are you sure?' } , class:"btn btn-danger"%></div><br>
         
          
            </div>
- </div>
+         </div>
 
     
 
@@ -121,9 +119,8 @@
 <% end%>
 
 <% else %>
- <p>You are not signed in.</p>
- 
-
- 
-   <i class="glyphicon glyphicon-share-alt"></i><%= link_to 'Login', new_member_session_path %>
+  <p>You are not signed in.</p>
+  <%= link_to 'Login', new_member_session_path %>
 <% end %>
+
+</body>
