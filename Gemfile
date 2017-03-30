@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 gem 'devise'
-gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem "paperclip"
 gem 'bootstrap-generators', '~> 3.3.4'
 gem "therubyracer"
 gem "less-rails"
@@ -57,6 +57,6 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
   gem 'figaro'
-  gem 'aws-sdk', '< 2.0'
+  gem 'aws-sdk'
 end
 
