@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  truck_id: 
+  truck_order_id: 
+  time: 2017-03-26 00:22:24
+
+two:
+  truck_id: 
+  truck_order_id: 
+  time: 2017-03-26 00:22:24

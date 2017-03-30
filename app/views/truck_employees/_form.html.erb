@@ -1,0 +1,28 @@
+<%= form_for(@truck_employee) do |f| %>
+  <% if @truck_employee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@truck_employee.errors.count, "error") %> prohibited this truck_employee from being saved:</h2>
+
+      <ul>
+      <% @truck_employee.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :truck_id %><br>
+    <%= f.text_field :truck_id %>
+  </div>
+  <div class="field">
+    <h3>Add Employee:</h3><br>
+    <%= f.collection_radio_buttons :employee_id, Employee.all, :id, :user_id ,:include_blank => true  do |b|
+    b.label {'<div class="userbuttons">'.html_safe+ b.radio_button  + b.object.user.vorname.html_safe + " " + b.object.user.nachname + '<br />'.html_safe + image_tag(b.object.user.image(:thumb), :class => "thumbbilder") + '</div>'.html_safe }
+    end%>
+    <br>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

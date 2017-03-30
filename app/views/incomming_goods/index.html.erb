@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Incomming Goods</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Truck</th>
+      <th>Ordernumber</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @incomming_goods.each do |incomming_good| %>
+      <tr>
+        <td><%= incomming_good.truck %></td>
+        <td><%= incomming_good.ordernumber %></td>
+        <td><%= link_to 'Show', incomming_good %></td>
+        <td><%= link_to 'Edit', edit_incomming_good_path(incomming_good) %></td>
+        <td><%= link_to 'Destroy', incomming_good, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Incomming good', new_incomming_good_path %>

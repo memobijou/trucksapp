@@ -1,0 +1,81 @@
+<%= form_for(@employee) do |f| %>
+  <% if @employee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+
+      <ul>
+      <% @employee.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <% if @employee_user != [] %>
+
+    
+
+    
+    <h3>Change User:</h3><br>
+    <%= f.collection_radio_buttons :user_id, @employee_user, :id, :vorname ,:include_blank => true  do |b|
+    b.label {'<div class="userbuttons">'.html_safe+ b.radio_button  + b.object.vorname.html_safe + " " + b.object.nachname + '<br />'.html_safe + image_tag(b.object.image(:thumb), :class => "thumbbilder") + '</div>'.html_safe }
+    end%>
+    <br>
+
+    <% if @employee.new_record? %>  
+
+        
+    <h3>Add User:</h3><br>
+    <%= f.fields_for :user do |user_form| %>
+    <%= user_form.label :vorname %>
+    <%= user_form.text_field :vorname %><br>
+    <%= user_form.label :nachname %>
+    <%= user_form.text_field :nachname %><br>
+    <%= user_form.label :email %>
+    <%= user_form.text_field :email %><br>
+    <%= user_form.label :image %>
+    <%= user_form.file_field :image %>
+    <% end %>
+    <% end %>
+
+    <% else %>
+ 
+    
+    <h3>No User available to create or change an Employee</h3>
+    
+
+    <br>
+    
+ 
+
+    <%end%>
+     
+   
+    <h3>Change or Add Supervisors</h3>
+    <%= f.fields_for :employee_supervisors do |employee_supervisor| %>
+    <%= employee_supervisor.collection_radio_buttons :supervisor_id, Supervisor.all, :id, :user_id ,:include_blank => true do |b|
+    b.label {'<div class="userbuttons">'.html_safe+ b.radio_button + b.object.user.vorname + " " + b.object.user.nachname  + '<br />'.html_safe + image_tag(b.object.user.image(:thumb), :class => "thumbbilder") + '</div>'.html_safe }
+    end%>
+    
+     <%= employee_supervisor.label :priority %>
+     <%= employee_supervisor.text_field :priority %>
+     <%= employee_supervisor.check_box :_destroy, as: :boolean %>
+    <% end %> 
+    
+
+    <%= f.fields_for :employee_workinghours do |employee_workinghour| %>
+    <%= employee_workinghour.collection_radio_buttons :working_hour_id, WorkingHour.all, :id, :day_id ,:include_blank => true do |b|
+    b.label {'<div class="userbuttons">'.html_safe+ b.radio_button + b.object.day.day + " " + b.object.start_time.to_s(:time)  + ' - '.html_safe + b.object.end_time.to_s(:time) + '</div>'.html_safe }
+    end%>
+    <br>
+    <% end %>
+
+    
+     <div class="actions">
+    <%= f.submit %>
+    </div>
+
+  </div>
+
+<% end %>

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Outgoing Goods</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Truck</th>
+      <th>Request number</th>
+      <th>Delivery note number</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @outgoing_goods.each do |outgoing_good| %>
+      <tr>
+        <td><%= outgoing_good.truck %></td>
+        <td><%= outgoing_good.request_number %></td>
+        <td><%= outgoing_good.delivery_note_number %></td>
+        <td><%= link_to 'Show', outgoing_good %></td>
+        <td><%= link_to 'Edit', edit_outgoing_good_path(outgoing_good) %></td>
+        <td><%= link_to 'Destroy', outgoing_good, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Outgoing good', new_outgoing_good_path %>

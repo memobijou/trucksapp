@@ -1,0 +1,29 @@
+<%= form_for(@supervisor) do |f| %>
+  <% if @supervisor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@supervisor.errors.count, "error") %> prohibited this supervisor from being saved:</h2>
+
+      <ul>
+      <% @supervisor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <div class="field">
+    <%= f.label :user_id %><br>
+    <% if @employee_user != [] %>
+    <%= f.collection_radio_buttons :user_id, @supervisor_user, :id, :vorname ,:include_blank => true  do |b|
+    b.label {'<div class="userbuttons">'.html_safe+ b.radio_button  + b.object.vorname.html_safe + " " + b.object.nachname + '<br />'.html_safe + image_tag(b.object.image(:thumb), :class => "thumbbilder") + '</div>'.html_safe }
+    end%>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+    <% else %>
+    <h3>No User available to assign to an Supervisor</h3>
+
+    <% end %>
+
+  </div>
+<% end %>

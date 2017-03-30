@@ -1,0 +1,65 @@
+<%= form_for(@truck) do |f| %>
+  <% if @truck.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@truck.errors.count, "error") %> prohibited this truck from being saved:</h2>
+
+      <ul>
+      <% @truck.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :unitload %><br>
+    <%= f.number_field :unitload %>
+  </div>
+  <div class="field">
+    <%= f.label :numberpallets %><br>
+    <%= f.number_field :numberpallets %>
+  </div>
+  <div class="field">
+    <%= f.label :supplier %><br>
+    <%= f.text_field :supplier %>
+  </div>
+  <div class="field">
+    <%= f.label :licenseplate %><br>
+    <%= f.text_field :licenseplate %>
+  </div>
+  <div class="field">
+    <%= f.label :shippingagency %><br>
+    <%= f.text_field :shippingagency %>
+  </div>
+  <div class="field">
+    <%= f.label :occupied %><br>
+    <%= f.check_box :occupied %>
+  </div>
+  
+   <h3>Add Incoming:</h3><br>
+    <%= f.fields_for :incomming_good do |incomming_good_form| %>
+    <%= incomming_good_form.label :ordernumber %><br>
+    <%= incomming_good_form.text_field :ordernumber %><br>
+    <% end %>
+    
+    <h3>Add Outgoing:</h3><br>
+    <%= f.fields_for :outgoing_good do |outgoing_good_form| %>
+    <%= outgoing_good_form.label :request_number %><br>
+    <%= outgoing_good_form.text_field :request_number %><br><br>
+    <%= outgoing_good_form.label :delivery_note_number %><br>
+    <%= outgoing_good_form.text_field :delivery_note_number %><br>
+    <% end %>
+    
+   <h3>Add Employee:</h3><br>
+    <%= f.fields_for :truck_employees do |truck_employee|  %>
+    <%= truck_employee.collection_radio_buttons :employee_id, Employee.all, :id, :user_id ,:include_blank => true  do |b|
+    b.label {'<div class="userbuttons">'.html_safe + b.radio_button  + b.object.user.vorname.html_safe + " " + b.object.user.nachname + '<br />'.html_safe + image_tag(b.object.user.image(:thumb), :class => "thumbbilder") + '</div>'.html_safe }
+    end%>
+    <% end %>
+    <br>
+
+    
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

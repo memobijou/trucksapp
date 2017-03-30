@@ -1,0 +1,129 @@
+<head>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<link rel="stylesheet" href="assets/application.css">
+
+</head>
+
+
+<div class="head">
+    
+
+    
+<p id="notice"><%= notice %></p>
+
+<% if member_signed_in? %>
+
+
+  <p>Welcome, <%= current_member.email %></p>
+  
+  <div class="logout"><%= link_to 'Logout' ,destroy_member_session_path, :method => :delete,class: "btn btn-danger" %>
+</div>
+
+
+</div>
+
+
+
+<div class="Titel">
+
+<div class="datumm">
+    
+<%= form_tag({ :action => "index"}, { :method => "get"}) do %>
+<%= select_date(date = Date.current, options = {}, html_options = {class: "btn btn-default"})%>
+<%= submit_tag "Filter" ,class: "btn btn-default" %>
+</div>
+<% end %>
+     
+     
+     <div class="print"><input name="b_print" type="button" class="btn btn-default"   onClick="printdiv('div_print');" value=" Print Page ">
+     <%= link_to 'New Truck order', new_truck_order_path, class: "btn btn-primary"%>
+
+</div>
+</div>
+
+    
+
+    <div class="Container" id="div_print">
+
+
+    <% @truck_orders.each do |truck_order| %>
+
+  
+    <div class="gesamteintrag2" >
+
+
+         <div class="datum">Date:<%= truck_order.date %></div>
+        
+    <% eingang = 0 %>
+    <% ausgang = 0 %> 
+   
+    <%truck_order.truck_truck_orders.each do |to| %>
+    <% if to.truck.incoming == true%>
+    <h1>    <% eingang = eingang + 1 %></h1>
+    <%end%>
+    
+    <% if to.truck.outgoing == true%>
+    <h1>    <% ausgang = ausgang + 1 %></h1>
+    <%end%>    
+       
+      
+      
+ <div class="eintrag"> 
+ 
+ 
+         
+         <p> <b>Unitload:</b>         <%= to.truck.unitload if to.truck %></p>
+         <p><b>Numberpallets:</b>     <%= to.truck.numberpallets if to.truck %></p>
+         <p><b>Licensplate:</b>       <%= to.truck.licenseplate if to.truck %></p>
+         <p><b>Shippingagency:</b>     <%= to.truck.shippingagency if to.truck %></p>
+         <p><b>Occupied:</b>           <%= to.truck.occupied if to.truck %></p>
+         <p><b>Ordernumber:</b>       <%= to.truck.ordernumber if to.truck %></p>
+         <p><b>Requestnumber:</b>     <%= to.truck.request_number if to.truck %></p>
+         <p><b>Delivery Notenumber:</b><%= to.truck.delivery_note_number if to.truck %></p>
+         <% if to.truck %>
+         <p><b>Employees:</b><% to.truck.truck_employees.each do |te| %></p>
+          <%=te.employee.user.vorname %>
+          <%=te.employee.user.nachname %>
+          <%= image_tag te.employee.user.image %>
+         <% end %> 
+       <% end %>
+
+
+        </div>
+    
+
+
+    <% end %>
+    
+           
+          
+       
+       <div class="ende">
+           <div class="wareneingang">Incoming: <%= eingang %></div>
+           <div class="warenausgang">Outgoing: <%= ausgang %></div>
+        <div class="edit"><%= link_to 'Edit', edit_truck_order_path(truck_order),class: "btn btn-success" , :onclick => 'doMyStuff()'%></div>
+        <div class="destroy"><%= link_to 'Destroy', truck_order, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-danger" %></div><br>
+        
+         
+           </div>
+ </div>
+
+    
+
+
+
+
+<% end%>
+
+<% else %>
+ <p>You are not signed in.</p>
+ 
+
+ 
+   <i class="glyphicon glyphicon-share-alt"></i><%= link_to 'Login', new_member_session_path %>
+<% end %>

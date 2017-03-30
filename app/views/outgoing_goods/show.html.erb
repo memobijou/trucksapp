@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Truck:</strong>
+  <%= @outgoing_good.truck %>
+</p>
+
+<p>
+  <strong>Request number:</strong>
+  <%= @outgoing_good.request_number %>
+</p>
+
+<p>
+  <strong>Delivery note number:</strong>
+  <%= @outgoing_good.delivery_note_number %>
+</p>
+
+<%= link_to 'Edit', edit_outgoing_good_path(@outgoing_good) %> |
+<%= link_to 'Back', outgoing_goods_path %>

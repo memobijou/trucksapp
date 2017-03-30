@@ -1,0 +1,141 @@
+<%= form_for(@truck_order) do |f| %>
+  <% if @truck_order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@truck_order.errors.count, "error") %> prohibited this truck_order from being saved:</h2>
+
+      <ul>
+      <% @truck_order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>    
+
+  <% end %>
+
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.date_select :date%>
+  </div>
+  <div class="fieldkomplett">
+        <%truck_nummer=0%>
+
+    <%= f.fields_for :truck_truck_orders do |truck_truck_order| %>
+    <div class="field">
+      <div class="fieldinnen">
+    <h3>Truck: <%=truck_nummer=truck_nummer+1%></h3><br>
+    
+    <%= truck_truck_order.label :time %>
+    <%= truck_truck_order.time_select :time, :ignore_date => true ,:class => "btn btn-default" %><br>
+    <%= truck_truck_order.fields_for :truck do |truck_form| %>
+    
+    
+    <%= truck_form.label :incoming ,:class => "btn btn-default" %>
+    <%= truck_form.check_box :incoming %><br>
+    
+    
+    <%= truck_form.label :outgoing ,:class => "btn btn-default" %>
+    <%= truck_form.check_box :outgoing %><br>
+    
+        <div class="incommingfeld<%=truck_nummer%>" id="incommingfeldid<%=truck_nummer%>">
+
+    <%= truck_form.label :ordernumber %>
+    <%= truck_form.text_field :ordernumber, :class => "form-control" %><br>
+        </div>
+    
+    <%= truck_form.label :unitload %>
+    <%= truck_form.text_field :unitload, :class => "form-control" %><br>
+    <%= truck_form.label :numberpallets %>
+    <%= truck_form.text_field :numberpallets, :class => "form-control" %><br>
+    <%= truck_form.label :licenseplate %>
+    <%= truck_form.text_field :licenseplate, :class => "form-control" %><br>
+    <%= truck_form.label :shippingagency %>
+    <%= truck_form.text_field :shippingagency, :class => "form-control" %><br>
+    <%= truck_form.label :occupied %>
+    <%= truck_form.text_field :occupied, :class => "form-control" %><br>
+    
+           <div class="outgoing<%=truck_nummer%>" id="outgoingfeldid<%=truck_nummer%>">
+
+    <%= truck_form.label :request_number %>
+    <%= truck_form.text_field :request_number, :class => "form-control" %><br>
+    <%= truck_form.label :delivery_note_number %>
+    <%= truck_form.text_field :delivery_note_number, :class => "form-control" %><br>
+           </div>
+   </div>
+       
+       <div class="buttons<%=truck_nummer%>" id="buttons<%=truck_nummer%>">
+         
+                  <p>Add a Employee or change a group</p>
+                
+                </div>
+                
+                
+                
+                
+                
+    <!-- <a onclick="group1()">change group1</a>
+       <a onclick="group2()">change group2</a>
+-->
+
+
+    
+    
+    <!-- <h3>Add Incoming:</h3><br> -->
+    <!--# truck_form.fields_for :incomming_good do |incomming_good_form|-->
+    <!-- #incomming_good_form.label :ordernumber --><br>
+    <!-- #incomming_good_form.text_field :ordernumber --><br>
+    <!-- #end -->
+    
+  
+    
+   <!-- <h3>Add Outgoing:</h3><br> -->
+    <!-- #truck_form.fields_for :outgoing_good do |outgoing_good_form| -->
+    <!--# outgoing_good_form.label :request_number --><br>
+    <!--=# outgoing_good_form.text_field :request_number --><br><br>
+    <!-- #outgoing_good_form.label :delivery_note_number --><br>
+    <!-- #outgoing_good_form.text_field :delivery_note_number --><br>
+    <!-- #end -->
+    <!-- <h3>Employees:</h3><br> -->
+    <%i=0%>
+    <%j=0%>
+    <%x=0%>
+    <div class="arbeiter">
+    <% n = Employee.all.count-1 %>
+    <%= truck_form.fields_for :truck_employees do |truck_employee|  %>
+    <%= truck_employee.collection_radio_buttons :employee_id, Employee.all, :id, :user_id ,:include_blank => true  do |b|
+      #(product == @products.last ? "last" : "")
+    b.label( :id => (x <= n ? "#{x=x+1}" : "#{x=1}"), :class => (x == 1 ? "#{truck_nummer.to_s + (j=j+1).to_s}" : "#{truck_nummer.to_s + j.to_s}") ){'<div class="userbuttons" '.html_safe + 'id="A">'.html_safe  + b.radio_button  + b.object.user.vorname.html_safe + " " + b.object.user.nachname + '<br />'.html_safe + image_tag(b.object.user.image(:thumb), :class => "thumbbilder") + '</div> '.html_safe }
+    #"AREO#{i=i+1} #{n}")
+    end%>
+    <% end %>
+    
+   </div>
+
+
+            
+            
+            <div class="global" style="display:none"><%=j.to_i%></div>
+           
+            <div class="globalemployee2"><%=j-1.to_i%> Employees are asigned - add another </div>
+              
+            
+            
+            
+            <div class="global<%=truck_nummer%>"  style="display:none"><%=j-1.to_i%></div>
+          
+            
+            
+            
+            
+    <br>
+      </div>
+
+    <% end %>
+    <% end %>
+   
+
+   <div class="globaltrucknummer" style="display:none"><%=truck_nummer%></div>
+  <div class="actions">
+    
+    <%= f.submit :class => "btn btn-default"%>
+  </div>
+<% end %>

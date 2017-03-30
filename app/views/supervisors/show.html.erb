@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <br><%= @supervisor.user.vorname %> <%= @supervisor.user.nachname %>
+
+</p>
+
+<%= image_tag @supervisor.user.image.url(:medium), :class => "mediumbilder" %>
+<%= link_to 'Edit', edit_supervisor_path(@supervisor) %> |
+<%= link_to 'Back', supervisors_path %>

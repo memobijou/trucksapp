@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Unitload:</strong>
+  <%= @truck.unitload %>
+</p>
+
+<p>
+  <strong>Numberpallets:</strong>
+  <%= @truck.numberpallets %>
+</p>
+
+<p>
+  <strong>Supplier:</strong>
+  <%= @truck.supplier %>
+</p>
+
+<p>
+  <strong>Licenseplate:</strong>
+  <%= @truck.licenseplate %>
+</p>
+
+<p>
+  <strong>Shippingagency:</strong>
+  <%= @truck.shippingagency %>
+</p>
+
+<p>
+  <strong>Occupied:</strong>
+  <%= @truck.occupied %>
+</p>
+
+<%= link_to 'Edit', edit_truck_path(@truck) %> |
+<%= link_to 'Back', trucks_path %>

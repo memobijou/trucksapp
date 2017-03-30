@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @working_hour.day.day %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @working_hour.start_time.to_s(:time) %>
+</p>
+
+<p>
+  <strong>End Time:</strong>
+  <%= @working_hour.end_time.to_s(:time) %>
+</p>
+
+<%= link_to 'Edit', edit_working_hour_path(@working_hour) %> |
+<%= link_to 'Back', working_hours_path %>

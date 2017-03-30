@@ -1,0 +1,31 @@
+<%= form_for(@employee_vacation) do |f| %>
+  <% if @employee_vacation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employee_vacation.errors.count, "error") %> prohibited this employee_vacation from being saved:</h2>
+
+      <ul>
+      <% @employee_vacation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <div class="field">
+    <%= f.collection_radio_buttons :employee_workinghour_id, EmployeeWorkinghour.all, :id, :employee_id ,:include_blank => true do |b|
+    b.label {'<div class="userbuttons">'.html_safe+ b.radio_button + b.object.employee.user.vorname  + " " + b.object.employee.user.nachname + " :" + b.object.working_hour.day.day + " " + b.object.working_hour.start_time.to_s(:time) + " - " +  b.object.working_hour.end_time.to_s(:time) + '</div>'.html_safe }
+    end%>
+    <br>
+  </div>  
+  <div class="field">
+    <%= f.label :datum %><br>
+    <%= f.date_select :datum %>
+  </div>
+  <div class="field">
+    <%= f.label :urlaub %><br>
+    <%= f.check_box :urlaub %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

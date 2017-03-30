@@ -1,0 +1,41 @@
+<%= form_for(@working_hour) do |f| %>
+  <% if @working_hour.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@working_hour.errors.count, "error") %> prohibited this working_hour from being saved:</h2>
+
+      <ul>
+      <% @working_hour.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+    <h3>Change or Add Employee</h3>
+    <%= f.fields_for :employee_workinghours do |employee_workinghour| %>
+    <%= employee_workinghour.collection_radio_buttons :employee_id, Employee.all, :id, :user_id ,:include_blank => true do |b|
+    b.label {'<div class="userbuttons">'.html_safe+ b.radio_button + b.object.user.vorname + " " + b.object.user.nachname  + '<br />'.html_safe + image_tag(b.object.user.image(:thumb), :class => "thumbbilder") + '</div>'.html_safe }
+    end%>
+    
+     <%= employee_workinghour.check_box :_destroy, as: :boolean %>
+    <% end %> 
+
+    <div class="field">
+    <%= f.collection_radio_buttons :day_id, Day.all, :id, :day ,:include_blank => true  %>
+    <br>
+
+    
+  </div>
+  <div class="field">
+    <%= f.label :start_time %><br>
+    <%= f.time_select :start_time, :ignore_date => true %>
+  </div>
+  <div class="field">
+    <%= f.label :end_time %><br>
+    <%= f.time_select :end_time, :ignore_date => true %>
+
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

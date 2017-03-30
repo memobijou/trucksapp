@@ -1,0 +1,1 @@
+json.partial! "truck_truck_orders/truck_truck_order", truck_truck_order: @truck_truck_order

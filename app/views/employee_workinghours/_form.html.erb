@@ -1,0 +1,23 @@
+<%= form_for(@employee_workinghour) do |f| %>
+  <% if @employee_workinghour.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employee_workinghour.errors.count, "error") %> prohibited this employee_workinghour from being saved:</h2>
+      <ul>
+      <% @employee_workinghour.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.collection_radio_buttons :employee_id, Employee.all, :id, :user_id, :include_blank => true do |b|
+    b.label {'<div class="userbuttons">'.html_safe+ b.radio_button + b.object.user.vorname + " " + b.object.user.nachname  + '<br />'.html_safe + image_tag(b.object.user.image(:thumb), :class => "thumbbilder") + '</div>'.html_safe }
+    end%><br>
+  </div>
+    <%= f.collection_radio_buttons :working_hour_id, WorkingHour.all, :id, :day_id, :include_blank => true do |b|
+    b.label {'<div class="userbuttons">'.html_safe+ b.radio_button + b.object.day.day + " " + b.object.start_time.to_s(:time)  + ' - '.html_safe + b.object.end_time.to_s(:time) + '</div>'.html_safe }
+    end%><br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

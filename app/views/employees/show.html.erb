@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <br><%= @employee.user.vorname %> <%= @employee.user.nachname %>
+  <br>
+  <%= image_tag @employee.user.image.url(:medium), :class => "mediumbilder" %>
+
+  
+  <h3>Supervisors</h3>
+  <% @employee_supervisors.each do |employee_supervisor|%>
+  <p><%= employee_supervisor.supervisor.user.vorname %> <%= employee_supervisor.supervisor.user.nachname %> <%= image_tag employee_supervisor.supervisor.user.image.url(:thumb), :class=> "thumbbilder" %></p>
+  <% end %>
+</p>
+<%= link_to 'Edit', edit_employee_path(@employee) %> |
+<%= link_to 'Back', employees_path %>

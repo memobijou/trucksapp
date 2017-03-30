@@ -1,0 +1,1 @@
+json.partial! "outgoing_goods/outgoing_good", outgoing_good: @outgoing_good

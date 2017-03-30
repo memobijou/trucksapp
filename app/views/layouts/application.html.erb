@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workspace</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <style>
+body {
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    padding-left: 50px;
+}
+
+th {
+      padding-right: 10px;
+}
+
+.userbuttons {
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+
+.thumbbilder {
+  border-radius: 50%;
+}
+
+.mediumbilder {
+  border-radius: 50%;
+}
+
+td {
+        padding-top: 15px;
+        padding-right: 20px;
+}
+
+</style>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>

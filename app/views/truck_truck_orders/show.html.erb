@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Truck:</strong>
+  <%= @truck_truck_order.truck %>
+</p>
+
+<p>
+  <strong>Truck order:</strong>
+  <%= @truck_truck_order.truck_order %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @truck_truck_order.time %>
+</p>
+
+<%= link_to 'Edit', edit_truck_truck_order_path(@truck_truck_order) %> |
+<%= link_to 'Back', truck_truck_orders_path %>

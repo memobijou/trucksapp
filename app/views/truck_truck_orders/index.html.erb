@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Truck Truck Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Truck</th>
+      <th>Truck order</th>
+      <th>Time</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @truck_truck_orders.each do |truck_truck_order| %>
+      <tr>
+        <td><%= truck_truck_order.truck %></td>
+        <td><%= truck_truck_order.truck_order %></td>
+        <td><%= truck_truck_order.time %></td>
+        <td><%= link_to 'Show', truck_truck_order %></td>
+        <td><%= link_to 'Edit', edit_truck_truck_order_path(truck_truck_order) %></td>
+        <td><%= link_to 'Destroy', truck_truck_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Truck truck order', new_truck_truck_order_path %>

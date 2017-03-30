@@ -1,0 +1,1 @@
+json.array! @employee_supervisors, partial: 'employee_supervisors/employee_supervisor', as: :employee_supervisor

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Employee:</strong>
+  <%= @employee_workinghour.employee %>
+</p>
+
+<p>
+  <strong>Working hour:</strong>
+  <%= @employee_workinghour.working_hour %>
+</p>
+
+<%= link_to 'Edit', edit_employee_workinghour_path(@employee_workinghour) %> |
+<%= link_to 'Back', employee_workinghours_path %>

@@ -1,0 +1,2 @@
+module IncommingGoodsHelper
+end

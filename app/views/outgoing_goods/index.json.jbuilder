@@ -1,0 +1,1 @@
+json.array! @outgoing_goods, partial: 'outgoing_goods/outgoing_good', as: :outgoing_good

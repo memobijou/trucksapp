@@ -1,0 +1,1 @@
+json.partial! "employee_workinghours/employee_workinghour", employee_workinghour: @employee_workinghour

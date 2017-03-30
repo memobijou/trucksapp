@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Truck:</strong>
+  <%= @incomming_good.truck %>
+</p>
+
+<p>
+  <strong>Ordernumber:</strong>
+  <%= @incomming_good.ordernumber %>
+</p>
+
+<%= link_to 'Edit', edit_incomming_good_path(@incomming_good) %> |
+<%= link_to 'Back', incomming_goods_path %>

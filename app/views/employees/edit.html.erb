@@ -1,0 +1,16 @@
+<h1>Editing Employee</h1>
+<% flash.each do |key, value| %>
+  <h1><font color="red"> <%= content_tag :div, value, class: "flash #{key}" %></font> </h1>
+<% end %>
+
+<%= @employee.user.vorname %>
+<%= Employee.find(params[:id]).user.vorname %> <%= Employee.find(params[:id]).user.nachname %>
+<br>
+<%= image_tag Employee.find(params[:id]).user.image.url(:small), :class=> "thumbbilder" %>
+
+<hr>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @employee %> |
+<%= link_to 'Back', employees_path %>

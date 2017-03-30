@@ -1,0 +1,70 @@
+<%= form_for(@truck_truck_order) do |f| %>
+  <% if @truck_truck_order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@truck_truck_order.errors.count, "error") %> prohibited this truck_truck_order from being saved:</h2>
+
+      <ul>
+      <% @truck_truck_order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+     <h3>Order:</h3><br>
+    <%= f.fields_for :truck_order do |truck_order_form| %>
+    <%= truck_order_form.label :date %><br>
+    <%= truck_order_form.date_select :date %><br>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <h3>Truck:</h3><br>
+    <%= f.fields_for :truck do |truck_form| %>
+    <%= truck_form.label :unitload, %>
+    <%= truck_form.text_field :unitload, required: true %><br>
+    <%= truck_form.label :numberpallets %>
+    <%= truck_form.text_field :numberpallets, required: true  %><br>
+    <%= truck_form.label :licenseplate %>
+    <%= truck_form.text_field :licenseplate, required: true  %><br>
+    <%= truck_form.label :shippingagency %>
+    <%= truck_form.text_field :shippingagency, required: true  %><br>
+    <%= truck_form.label :occupied %>
+    <%= truck_form.text_field :occupied, :required => required: true %><br>
+    
+    <h3>Add Incoming:</h3><br>
+    <%= truck_form.fields_for :incomming_good do |incomming_good_form| %>
+    <%= incomming_good_form.label :ordernumber %><br>
+    <%= incomming_good_form.text_field :ordernumber %><br>
+    <% end %>
+    
+    
+    <h3>Add Outgoing:</h3><br>
+    <%= truck_form.fields_for :outgoing_good do |outgoing_good_form| %>
+    <%= outgoing_good_form.label :request_number %><br>
+    <%= outgoing_good_form.text_field :request_number %><br><br>
+    <%= outgoing_good_form.label :delivery_note_number %><br>
+    <%= outgoing_good_form.text_field :delivery_note_number %><br>
+    <% end %>
+    
+    <h3>Employees:</h3><br>
+    <%= truck_form.fields_for :truck_employees do |truck_employee|  %>
+    <%= truck_employee.collection_radio_buttons :employee_id, Employee.all, :id, :user_id ,:include_blank => true  do |b|
+    b.label {'<div class="userbuttons">'.html_safe + b.radio_button  + b.object.user.vorname.html_safe + " " + b.object.user.nachname + '<br />'.html_safe + image_tag(b.object.user.image(:thumb), :class => "thumbbilder") + '</div>'.html_safe }
+    end%>
+    <% end %>
+    <br>
+    
+    
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :time %><br>
+    <%= f.time_select :time %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,1 @@
+json.array! @employee_workinghours, partial: 'employee_workinghours/employee_workinghour', as: :employee_workinghour

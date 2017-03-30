@@ -1,0 +1,1 @@
+json.array! @truck_orders, partial: 'truck_orders/truck_order', as: :truck_order

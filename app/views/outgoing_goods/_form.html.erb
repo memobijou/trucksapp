@@ -1,0 +1,29 @@
+<%= form_for(@outgoing_good) do |f| %>
+  <% if @outgoing_good.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@outgoing_good.errors.count, "error") %> prohibited this outgoing_good from being saved:</h2>
+
+      <ul>
+      <% @outgoing_good.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :truck_id %><br>
+    <%= f.text_field :truck_id %>
+  </div>
+  <div class="field">
+    <%= f.label :request_number %><br>
+    <%= f.text_field :request_number %>
+  </div>
+  <div class="field">
+    <%= f.label :delivery_note_number %><br>
+    <%= f.text_field :delivery_note_number %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

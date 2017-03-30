@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee_workinghour_id: 
+  datum: 2017-03-23
+  urlaub: false
+
+two:
+  employee_workinghour_id: 
+  datum: 2017-03-23
+  urlaub: false
