@@ -5,8 +5,7 @@ gem 'bootstrap-generators', '~> 3.3.4'
 gem "therubyracer"
 gem "less-rails"
 gem "twitter-bootstrap-rails"
-gem 'figaro'
-gem 'aws-sdk', '< 2.0'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use sqlite3 as the database for Active Record
@@ -57,5 +56,7 @@ end
 group :production do
   gem 'pg'
   gem 'rails_12factor'
+  gem 'figaro'
+  gem 'aws-sdk', '~> 1.16.1'
 end
 
