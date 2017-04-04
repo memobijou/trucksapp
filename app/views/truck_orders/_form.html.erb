@@ -4,9 +4,11 @@
       <h2><%= pluralize(@truck_order.errors.count, "error") %> prohibited this truck_order from being saved:</h2>
 
       <ul>
-      <% @truck_order.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% @truck_order.errors.each do |attr, message| %>
+       <%= @truck_order.errors.first[1] %>
       <% end %>
+      
+
       </ul>
     </div>    
 
@@ -14,56 +16,71 @@
 
   <div class="field">
     <%= f.label :date %><br>
-    <%= f.date_select :date%>
+    <%= f.date_select :date %>
   </div>
   <div class="fieldkomplett">
         <%truck_nummer=0%>
 
     <%= f.fields_for :truck_truck_orders do |truck_truck_order| %>
     <div class="field">
-      <div class="fieldinnen">
+    
+    
     <h3>Truck: <%=truck_nummer=truck_nummer+1%></h3><br>
     
+      
+ 
     <%= truck_truck_order.label :time %>
-    <%= truck_truck_order.time_select :time, :ignore_date => true ,:class => "btn btn-default" %><br>
+    <%= truck_truck_order.time_select :time, :ignore_date => true %><br>
     <%= truck_truck_order.fields_for :truck do |truck_form| %>
     
-    
-    <%= truck_form.label :incoming ,:class => "btn btn-default" %>
+        
+ 
+    <%= truck_form.label :incoming, class:"btn btn-default" %>
     <%= truck_form.check_box :incoming %><br>
     
     
-    <%= truck_form.label :outgoing ,:class => "btn btn-default" %>
+    <%= truck_form.label :outgoing , class:"btn btn-warning"%>
     <%= truck_form.check_box :outgoing %><br>
+
     
-        <div class="incommingfeld<%=truck_nummer%>" id="incommingfeldid<%=truck_nummer%>">
+        <div class="incommingfeld<%=truck_nummer-1%>" id="truck_order_truck_truck_orders_attributes_<%=truck_nummer-1%>_truck_attributes_incoming2">
 
     <%= truck_form.label :ordernumber %>
-    <%= truck_form.text_field :ordernumber, :class => "form-control" %><br>
+    <%= truck_form.text_field :ordernumber , class:"form-control"%><br>
         </div>
     
     <%= truck_form.label :unitload %>
-    <%= truck_form.text_field :unitload, :class => "form-control" %><br>
+    <%= truck_form.text_field :unitload , class:"form-control"%><br>
     <%= truck_form.label :numberpallets %>
-    <%= truck_form.text_field :numberpallets, :class => "form-control" %><br>
+    <%= truck_form.text_field :numberpallets, class:"form-control" %><br>
     <%= truck_form.label :licenseplate %>
-    <%= truck_form.text_field :licenseplate, :class => "form-control" %><br>
+    <%= truck_form.text_field :licenseplate, class:"form-control" %><br>
     <%= truck_form.label :shippingagency %>
-    <%= truck_form.text_field :shippingagency, :class => "form-control" %><br>
-    <%= truck_form.label :occupied %>
-    <%= truck_form.text_field :occupied, :class => "form-control" %><br>
+    <%= truck_form.text_field :shippingagency, class:"form-control" %><br>
     
-           <div class="outgoing<%=truck_nummer%>" id="outgoingfeldid<%=truck_nummer%>">
+    
+           <div class="outgoing<%=truck_nummer-1%>" id="truck_order_truck_truck_orders_attributes_<%=truck_nummer-1%>_truck_attributes_outgoing3">
 
     <%= truck_form.label :request_number %>
-    <%= truck_form.text_field :request_number, :class => "form-control" %><br>
+    <%= truck_form.text_field :request_number, class:"form-control" %><br>
     <%= truck_form.label :delivery_note_number %>
-    <%= truck_form.text_field :delivery_note_number, :class => "form-control" %><br>
+    <%= truck_form.text_field :delivery_note_number , class:"form-control"%><br>
+     </div>
+    <%= truck_form.label :claim %>
+    <%= truck_form.file_field :claim , class:"form-control"%>>
+    <%= truck_truck_order.label :notes %><br>
+    <%= truck_truck_order.text_area(:notes, :size => "50x10") %><br>
+    <%= truck_form.label :completed %>
+    <%= truck_form.check_box :completed %><br>
+    
+  
            </div>
-   </div>
+
        
        <div class="buttons<%=truck_nummer%>" id="buttons<%=truck_nummer%>">
-         
+
+                  
+                        <br>
                   <p>Add a Employee or change a group</p>
                 
                 </div>
@@ -98,7 +115,6 @@
     <%i=0%>
     <%j=0%>
     <%x=0%>
-    <div class="arbeiter">
     <% n = Employee.all.count-1 %>
     <%= truck_form.fields_for :truck_employees do |truck_employee|  %>
     <%= truck_employee.collection_radio_buttons :employee_id, Employee.all, :id, :user_id ,:include_blank => true  do |b|
@@ -106,10 +122,10 @@
     b.label( :id => (x <= n ? "#{x=x+1}" : "#{x=1}"), :class => (x == 1 ? "#{truck_nummer.to_s + (j=j+1).to_s}" : "#{truck_nummer.to_s + j.to_s}") ){'<div class="userbuttons" '.html_safe + 'id="A">'.html_safe  + b.radio_button  + b.object.user.vorname.html_safe + " " + b.object.user.nachname + '<br />'.html_safe + image_tag(b.object.user.image(:thumb), :class => "thumbbilder") + '</div> '.html_safe }
     #"AREO#{i=i+1} #{n}")
     end%>
+
     <% end %>
     
-   </div>
-
+   
 
             
             
@@ -136,6 +152,6 @@
    <div class="globaltrucknummer" style="display:none"><%=truck_nummer%></div>
   <div class="actions">
     
-    <%= f.submit :class => "btn btn-default"%>
+    <%= f.submit %>
   </div>
 <% end %>

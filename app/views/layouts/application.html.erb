@@ -40,7 +40,8 @@ td {
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<h1 id="notice", style="color: red"><%= notice %></h1>
+<h1 style="color: red">  <%= flash[:error] unless flash[:error].blank? %> </h1>
 <%= yield %>
 
 </body>

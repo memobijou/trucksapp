@@ -1,5 +1,5 @@
 class TrucksController < ApplicationController
-  before_action :set_truck, only: [:show, :edit, :update, :destroy]
+  before_action :set_truck, only: [:show, :edit, :update, :destroy, :complete]
 
   # GET /trucks
   # GET /trucks.json
@@ -64,6 +64,11 @@ class TrucksController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def complete
+    @item.update_attribute(:completed_at, Time.now)
+    redirect_to :back
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -73,6 +78,6 @@ class TrucksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def truck_params
-      params.require(:truck).permit(:unitload, :numberpallets, :supplier, :licenseplate, :shippingagency, :occupied, incomming_good_attributes: [:id , :ordernumber, :_destroy], outgoing_good_attributes: [:id , :request_number, :delivery_note_number , :_destroy], truck_employees_attributes: [:id , :employee_id, :_destroy])
+      params.require(:truck).permit(:unitload, :numberpallets, :supplier, :licenseplate, :shippingagency, :occupied, :outgoing, :incoming, :claim, :completed, incomming_good_attributes: [:id , :ordernumber, :_destroy], outgoing_good_attributes: [:id , :request_number, :delivery_note_number , :_destroy], truck_employees_attributes: [:id , :employee_id, :_destroy])
     end
 end 

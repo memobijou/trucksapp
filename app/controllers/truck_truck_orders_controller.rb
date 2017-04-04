@@ -92,6 +92,6 @@ class TruckTruckOrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def truck_truck_order_params
-      params.require(:truck_truck_order).permit(:truck_id, :truck_order_id, :time, truck_attributes: [:id ,:unitload, :numberpallets, :supplier, :licenseplate, :shippingagency, :occupied, :_destroy, truck_employees_attributes: [:id , :employee_id, :_destroy], incomming_good_attributes: [:id , :ordernumber, :_destroy], outgoing_good_attributes: [:id , :request_number, :delivery_note_number , :_destroy]], truck_order_attributes: [:id ,:date])
+      params.require(:truck_truck_order).permit(:truck_id, :truck_order_id, :time, :notes, truck_attributes: [:id ,:unitload, :numberpallets, :supplier, :licenseplate, :shippingagency, :occupied, :outgoing, :incoming, :_destroy, truck_employees_attributes: [:id , :employee_id, :_destroy], incomming_good_attributes: [:id , :ordernumber, :_destroy], outgoing_good_attributes: [:id , :request_number, :delivery_note_number , :_destroy]], truck_order_attributes: [:id ,:date])
     end
 end

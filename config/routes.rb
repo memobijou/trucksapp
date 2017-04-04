@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   resources :supervisors
   resources :employees
   resources :users
+  
+  
+  get "/get_inouts" => "truck_orders#get_inouts"
   root 'truck_orders#index'
   
   # The priority is based upon order of creation: first created -> highest priority.

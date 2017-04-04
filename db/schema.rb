@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329075035) do
+ActiveRecord::Schema.define(version: 20170401205023) do
 
   create_table "days", force: :cascade do |t|
     t.string   "day"
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20170329075035) do
     t.time     "time"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "notes"
   end
 
   add_index "truck_truck_orders", ["truck_id"], name: "index_truck_truck_orders_on_truck_id"
@@ -146,6 +147,12 @@ ActiveRecord::Schema.define(version: 20170329075035) do
     t.string   "delivery_note_number"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.string   "claim_file_name"
+    t.string   "claim_content_type"
+    t.integer  "claim_file_size"
+    t.datetime "claim_updated_at"
+    t.datetime "completed_at"
+    t.boolean  "completed"
   end
 
   create_table "users", force: :cascade do |t|
